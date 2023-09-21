@@ -1,0 +1,5 @@
+Padrão DRO -> Data transfer Object
+
+Muito utilizados em API para representar os dados que chegam na API e que devolvem da API. Utilizaremos dto em todos
+os pontos de entrada e saída da API, sempre que receber ou devolver um dado da nossa api, vamos utilizar um dto
+que são classes contendo somente as informações que queremos receber ou devolver da nossa API.
