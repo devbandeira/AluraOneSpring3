@@ -1,0 +1,20 @@
+#Uma vez adicionado dependecia JPA -> Devo dizer os dados para conexão com o banco de dados -> esse arquivo
+#properties funciona com key: value que algumas já são pre definidas.
+
+#são as 3 propriedades minimas que o JPA precisa para conectar no DB, quem vai gerenciar etc, vai ser o proprio SPRING
+#spring.datasource.url=jdbc:mysql://localhost/vollmed_api
+
+# Spring Boot pode não encontrar automaticamente o driver do MySQL no projeto, então usar a seguinte propriedadde.
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+#spring.datasource.username=root
+#spring.datasource.password=root
+
+#--------------------------
+#config para YAML
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/clinica
+    username: root
+    password: root
