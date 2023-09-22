@@ -4,16 +4,12 @@ import med.voll.api.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.*;
 
-/*Entidade JPA para persistir o dados no DB*/
-/*Parecido com o RECORD, são os mesmos atributos declarados la no DTO, mas aqui é uma entidade JPA. São
-* duas coisas distintas*/
-
 @Table(name = "medicos")
 @Entity(name = "Medico")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")/*gera o rashcode em cima do ID e n de todos*/
+@EqualsAndHashCode(of = "id")
 public class Medico {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +21,16 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;
 
-    /*
-    essa anotacao para não criar uma tabela no DB e cria relacionamentos. No DB eles ficam em classes separados
-    *mas no DB ele considera os campos da classe endereco fazem parte da tabela de Medicos, para funcionar
-    * la na classe endereco deve ter a anotacao @Embeddeble tbm
-     */
     @Embedded
     private Endereco endereco;
 
 
+    /*Contrutor criado para receber dados e gerar o modelo correto para ser usado na função cadastro na classe
+    * MedicoController*/
+    public Medico(DadosCadastroMedico dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.crm = dados.crm();
+        this.endereco = new Endereco(dados.endereco());/*e na classe Endereco eu crio um construtor que recebe endereco que é nosso DTO*/
+    }
 }
