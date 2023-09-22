@@ -17,8 +17,6 @@ public class Endereco {
     private String cidade;
     private String uf;
 
-    /*construtor criado para o construtor na classe MEDICO, no endereco instanciado receber um objeto do tipo
-    * endereco que é do nosso DTO*/
     public Endereco(endereco endereco) {
         this.logradouro = endereco.logradouro();
         this.bairro = endereco.bairro();

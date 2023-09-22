@@ -24,13 +24,10 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
-
-    /*Contrutor criado para receber dados e gerar o modelo correto para ser usado na função cadastro na classe
-    * MedicoController*/
     public Medico(DadosCadastroMedico dados) {
         this.nome = dados.nome();
         this.email = dados.email();
         this.crm = dados.crm();
-        this.endereco = new Endereco(dados.endereco());/*e na classe Endereco eu crio um construtor que recebe endereco que é nosso DTO*/
+        this.endereco = new Endereco(dados.endereco());
     }
 }
