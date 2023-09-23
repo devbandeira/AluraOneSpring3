@@ -8,6 +8,7 @@ import med.voll.api.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +25,15 @@ public class MedicoController {
         repository.save(new Medico(dados));
     }
 
+    /*Posso enviar por URL os parametros de SIZE&PAGE&SORT, mas posso mudar o padrão do PAGEABLE aqui
+    * por padrão ele tem size 20, etc. Se for informado o SIZE na url esse padrão, se comporta conforme url mandar.
+    * Padrão Spring: Size = 20, PAGE = 0, SORT conforme foi inserido no db*/
     @GetMapping
-    public Page<DadosListagemMedico> listar(Pageable paginacao){/*Passando a class Pageable do Spring e vamos mudar
-    o tipo List<> para uma classe do proprio Springboot chamada Page*/
-        /*No repository existe uma sobrecarga do findAll que recebe um Pageble como parametro*/
-        /*Vamos ter que tirar o stream, porque o findall devolve um Page e o PAGE ja tem o método MAP diretamente e remover
-        * o toList() no final da fn
-        * Antigo -> return repository.findAll(paginacao).stream().map(DadosListagemMedico::new).toList();
-        * chamando o MAP ele já faz a conversão e devolve um PAGE do DTO DadosListagemMedico automaticamente*/
+    public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, page = 0, sort = {"nome"}) Pageable paginacao){
         return repository.findAll(paginacao).map(DadosListagemMedico::new);
     }
 }
+/*Posso mudar os nomes SIZE - PAGE - etc para portugues no application.properties*/
+/*se eu abrir o terminal aqui no intelij, vejo que não mostra qual SQL foi executado para essa query. Posso ativar
+mudando a configuração no aplication.properties
+* */
