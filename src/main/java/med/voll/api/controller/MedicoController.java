@@ -20,10 +20,7 @@ public class MedicoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){/*OBS. Minha: Como aqui para salvar ele recebe
-    DadosCadastroMedico que é o record DTO, mas eu tenho que salvar minha ENTITY(ENTIDADE) Medico, crio um construtor
-    na ENTITY Medico que quando for chamada "new Medico" é preechida pelos dados do DTO, conforme cada atributo que eu
-    preciso*/
+    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){
         repository.save(new Medico(dados));
     }
 
@@ -31,5 +28,9 @@ public class MedicoController {
     public List<DadosListagemMedico> listar(){
         return repository.findAll().stream().map(DadosListagemMedico::new).toList();
     }
-
+/*Não vamos retornar uma List<Medico>, pois ele vai retornar todos os atributos e nossa REGRA de negocio quer somente
+* alguns atributos listados, então vamos criar um DTO para retornar os dados corretos, mas precisamos converter Medico
+* para o nosso DTO DadosListagemMedico, criando um construtor no DTO que recebe MEdico como parametro.*/
+    /*Meu map que vai fazer a conversão de Médico para DadosListagemMedico, map(DadosListagemMedico::new) passando
+    * e chamando o construtor no nosso DTO(criar um construtor que recebe do tipo médico)*/
 }
