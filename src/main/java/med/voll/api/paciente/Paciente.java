@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.endereco.DadosEndereco;
 import med.voll.api.endereco.Endereco;
 
 @Getter
@@ -32,5 +33,8 @@ public class Paciente {
         this.telefone = dados.telefone();
         this.cpf = dados.cpf();
         this.endereco = new Endereco(dados.endereco());
+    }
+
+    public Endereco atualizarEndereco(DadosEndereco endereco) {
     }
 }

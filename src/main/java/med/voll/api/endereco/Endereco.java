@@ -1,7 +1,9 @@
 package med.voll.api.endereco;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Embeddable
 @Getter
@@ -24,5 +26,30 @@ public class Endereco {
         this.complemento = endereco.numero();
         this.cidade = endereco.cidade();
         this.uf = endereco.uf();
+    }
+
+    public void atualizarEnderecoMedico(DadosEndereco endereco) {/*Montando como vai ocorrer a atualização, passando
+    o DTO de endereço que vai vir do front com os dados que serão usados para atualizar o OBJETO*/
+        if(endereco.logradouro() != null){
+            this.logradouro = endereco.logradouro();
+        }
+        if(endereco.bairro() != null){
+            this.bairro = endereco.bairro();
+        }
+        if(endereco.cep() != null){
+            this.cep = endereco.cep();
+        }
+        if(endereco.numero() != null){
+            this.numero = endereco.numero();
+        }
+        if(endereco.numero() != null){
+            this.complemento = endereco.numero();
+        }
+        if(endereco.cidade() != null){
+            this.cidade = endereco.cidade();
+        }
+        if(endereco.uf() != null){
+            this.uf = endereco.uf();
+        }
     }
 }
