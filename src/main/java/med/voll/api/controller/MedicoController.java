@@ -37,31 +37,21 @@ public class MedicoController {
         return pacienteRepository.findAll(paginacao).map(DadosListagemPaciente::new);
     }
 
-    /*não posos usar @RequestBody @Valid DadosCadastroMedico dados, pois os dados desse DTO são todos obrigatorios
-    * e para atualizar eles não são obrigatorios, posso att um, varios ou nenhum.
-    * Então vamos ter que criar um novo DTO para passar no lugar de DadosCadastroMedico*/
     @PutMapping
     @Transactional
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
-        /*Como vamos atualizar? : Precisamos primeiro trazer os dados atuais do BD e sobrebrescever de acordo com o novo
-        * DTO.*/
-        var medico = repository.getReferenceById(dados.id());/*Buscar a referencia pelo ID que esta dentro do nosso DTO recebido*/
-        medico.atualizarInformacoesMedico(dados);/*Qnd chamo aqui, passo o DADO novo que vai ser usado para att,
-         la na classe Medico e Endereco*/
+        var medico = repository.getReferenceById(dados.id());
+        medico.atualizarInformacoesMedico(dados);/*chamando o método da classe MEDICO*/
+    }
 
-        /*Como falo para ele att no BD, não precisa fazer nada, já é automatico, esse trecho de codigo vai rodar dentro
-        * de uma TRANSAÇÃO (TRANSACTIONAL) e ai a JPA se vc carrega uma entidade do BD e muda algum ATRIBUTO, a JPA
-        * Já faz o UPDATE automaticamente.*/
+    /*Como aqui vamos fazer diferente do método atualizar, o ID vai vir pela URL, então coloco alguns parametros no
+    * @DeleteMapping(), passando um "PARAMETRO DINAMICO" usando {} chaves*/
+    /*Para capturar esse ID dinamico que chega através da URL, basta eu receber como parametro no meu método excluir*/
+    @DeleteMapping("/{id}")
+    @Transactional/*como fazer uma escrita, preciso do transactional*/
+    public void excluir(@PathVariable Long id){/*Deixando somente "Long id" o spring n entende que o id vem da URL, então uso
+    @PathVariavle, dizendo que é o ID da URL.*/
+        repository.deleteById(id);/*chamo o repository para conecatar no meu DB e fazer minha consulta passando id*/
+
     }
 }
-/*
-    Para atualizar os dados precisamos:
-*Disparo uma requisição do tipo PUT.
-Levo o JSON com dados que eu quero atualizar do FRONT pro meu BACKEND, junto com o ID para identificar o obj vai ser att
-
-E no nosso controller aqui, para atualizar.
-Carregamos o registro atual com base no ID enviado
-Sobrescreve os atributos baseados nos novos campos chegados no DTO
-e não precisa chamar nada do REPOSITORY aqui a JPA Irá att automaticamente.
-
-*/

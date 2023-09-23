@@ -28,8 +28,7 @@ public class Endereco {
         this.uf = endereco.uf();
     }
 
-    public void atualizarEnderecoMedico(DadosEndereco endereco) {/*Montando como vai ocorrer a atualização, passando
-    o DTO de endereço que vai vir do front com os dados que serão usados para atualizar o OBJETO*/
+    public void atualizarEnderecoMedico(DadosEndereco endereco) {
         if(endereco.logradouro() != null){
             this.logradouro = endereco.logradouro();
         }
