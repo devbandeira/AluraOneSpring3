@@ -2,7 +2,6 @@ package med.voll.api.endereco;
 
 import jakarta.persistence.*;
 import lombok.*;
-import med.voll.api.medico.endereco;
 
 @Embeddable
 @Getter
@@ -17,7 +16,7 @@ public class Endereco {
     private String cidade;
     private String uf;
 
-    public Endereco(endereco endereco) {
+    public Endereco(DadosEndereco endereco) {
         this.logradouro = endereco.logradouro();
         this.bairro = endereco.bairro();
         this.cep = endereco.cep();

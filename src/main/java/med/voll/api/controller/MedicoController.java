@@ -1,5 +1,6 @@
 package med.voll.api.controller;
 
+import jakarta.validation.Valid;
 import med.voll.api.endereco.Endereco;
 import med.voll.api.medico.DadosCadastroMedico;
 import med.voll.api.medico.Medico;
@@ -19,10 +20,14 @@ public class MedicoController {
     private MedicoRepository repository;
 
     @PostMapping
-    @Transactional/*vem do pacote spring -> Como vou fazer uma escrita(Insert) no DB, preciso de uma transação ativa com
-     o DB.*/
-    public void cadastrar(@RequestBody DadosCadastroMedico dados){
+    @Transactional
+    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){
         repository.save(new Medico(dados));
     }
+    /*nosso método cadastrar recebe DadosCadastroMedico como parametro, que é onde estão os dados, que é um DTO RECORD
+    * Então lá que vamos fazer o bean validation*/
+    /*Usamos a anotação @VALID aqui tbm, para pedir par ao Spring integrar com o BEAN VALIDTION
+    validar o DadosCadastroMedico que é um DTO e como dentro dele vai ter outro DTO DadosEndereco, ele vai validar em
+    cascata*/
 
 }
