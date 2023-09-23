@@ -24,10 +24,5 @@ public class MedicoController {
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){
         repository.save(new Medico(dados));
     }
-    /*nosso método cadastrar recebe DadosCadastroMedico como parametro, que é onde estão os dados, que é um DTO RECORD
-    * Então lá que vamos fazer o bean validation*/
-    /*Usamos a anotação @VALID aqui tbm, para pedir par ao Spring integrar com o BEAN VALIDTION
-    validar o DadosCadastroMedico que é um DTO e como dentro dele vai ter outro DTO DadosEndereco, ele vai validar em
-    cascata*/
 
 }
