@@ -39,4 +39,13 @@ public class MedicoController {
     public Page<DadosListagemPaciente> listarPaciente(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
         return pacienteRepository.findAll(paginacao).map(DadosListagemPaciente::new);
     }
+
+    /*não posos usar @RequestBody @Valid DadosCadastroMedico dados, pois os dados desse DTO são todos obrigatorios
+    * e para atualizar eles não são obrigatorios, posso att um, varios ou nenhum.
+    * Então vamos ter que criar um novo DTO para passar no lugar de DadosCadastroMedico*/
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosCadastroMedico dados){
+
+    }
 }
